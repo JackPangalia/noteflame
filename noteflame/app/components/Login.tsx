@@ -1,9 +1,30 @@
+'use client'
+import { auth, googleProvider } from '../firebase-config'
+import { signInWithPopup, signOut } from 'firebase/auth'
+
 interface Props {
   isShown:boolean
 }
 
-
 const Login = ({isShown}:Props) => {
+  // sign in with google function
+  const signInWithGoogle = async () => {
+    try {
+      await signInWithPopup(auth, googleProvider)
+    } catch (error:any) {
+      console.log('error ', error)
+    }
+  }
+
+  // logout function 
+  const logOut = async () => {
+    try {
+      await signOut(auth)
+    } catch (error:any) {
+      console.log('error ', error)
+    }
+  }
+
   return (
     <div className = 'flex justify-around h-[88vh] items-center' style = {isShown ? {display: 'flex'} : {display: 'none'}}>
       <section className = 'flex flex-col items-center'>
@@ -75,6 +96,7 @@ const Login = ({isShown}:Props) => {
         
         <button
           className = 'bg-zinc-900 p-3 rounded-lg text-teal-500 hover:font-bold w-full mt-3'
+          onClick={signInWithGoogle}
         >
           Sign in with Google
         </button>

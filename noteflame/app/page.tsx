@@ -4,7 +4,7 @@ import WriteNote from "./components/WriteNote"
 const Home = () => {
   return (
     <>
-      <Login isShown = {false}/>
+      <Login isShown = {true}/>
       <WriteNote />
     </>
   )
